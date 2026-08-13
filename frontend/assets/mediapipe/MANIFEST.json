@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "purpose": "Offline browser landmark tracking for SignBridge isolated-word mode",
+  "generated_on": "2026-08-13",
+  "sources": [
+    {
+      "package": "@mediapipe/holistic",
+      "version": "0.5.1675471629",
+      "license": "Apache-2.0",
+      "base_url": "https://cdn.jsdelivr.net/npm/@mediapipe/holistic@0.5.1675471629/",
+      "metadata_url": "https://data.jsdelivr.com/v1/package/npm/@mediapipe/holistic@0.5.1675471629"
+    },
+    {
+      "package": "@mediapipe/drawing_utils",
+      "version": "0.3.1675466124",
+      "license": "Apache-2.0",
+      "base_url": "https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3.1675466124/",
+      "metadata_url": "https://data.jsdelivr.com/v1/package/npm/@mediapipe/drawing_utils@0.3.1675466124"
+    }
+  ],
+  "selection": "Minimal runtime for Holistic modelComplexity=1. Both SIMD and non-SIMD WASM branches are retained for browser compatibility; lite/heavy pose models, typings, readmes, and package metadata are intentionally omitted.",
+  "hash_algorithm": "SHA-256",
+  "files": [
+    { "path": "drawing_utils.js", "package": "@mediapipe/drawing_utils", "bytes": 3767, "sha256": "8d2128660de45875fc8cb3ff200d6432fc8bf556682ae71c173be24f42ea9ea3" },
+    { "path": "holistic.binarypb", "package": "@mediapipe/holistic", "bytes": 1741, "sha256": "734d540f71eba9cb9cc6989a61219c2449cd3af0c2c857956db94281a5dcfe08" },
+    { "path": "holistic.js", "package": "@mediapipe/holistic", "bytes": 78139, "sha256": "72597af8603eef62a1a4f375b6edd99eab050d8ff42ee9b9eb4b41d936a3d23c" },
+    { "path": "holistic_solution_packed_assets.data", "package": "@mediapipe/holistic", "bytes": 16877755, "sha256": "743ef881d77fb8fb8e831bd49e72e97c2ad5560803c76617157ccfcfebc5ca9d" },
+    { "path": "holistic_solution_packed_assets_loader.js", "package": "@mediapipe/holistic", "bytes": 9786, "sha256": "18913dfbb3f6c8d0196ba3bdc4bceb6d89b8bada64bec599e5a87430448cfa94" },
+    { "path": "holistic_solution_simd_wasm_bin.data", "package": "@mediapipe/holistic", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" },
+    { "path": "holistic_solution_simd_wasm_bin.js", "package": "@mediapipe/holistic", "bytes": 276482, "sha256": "5592f62878a0d4b65712d1630e605fb4f4affa58b324527a00b089aba17ea74d" },
+    { "path": "holistic_solution_simd_wasm_bin.wasm", "package": "@mediapipe/holistic", "bytes": 6511073, "sha256": "8c38692bf8150f7e6c109214454b14c4edcb3601086b9ee05c72e75f31c9c358" },
+    { "path": "holistic_solution_wasm_bin.js", "package": "@mediapipe/holistic", "bytes": 276477, "sha256": "587d63b5ddba9436803107181930ae30c38eb08b5eeb2f72b5f5236041c297b8" },
+    { "path": "holistic_solution_wasm_bin.wasm", "package": "@mediapipe/holistic", "bytes": 6400002, "sha256": "699c24ebf82290397373bd4bc150913edc91e2fccbf2b88a6f4cc5a6eef75b02" },
+    { "path": "pose_landmark_full.tflite", "package": "@mediapipe/holistic", "bytes": 6440512, "sha256": "e9a5c5cb17f736fafd4c2ec1da3b3d331d6edbe8a0d32395855aeb2cdfd64b9f" }
+  ]
+}

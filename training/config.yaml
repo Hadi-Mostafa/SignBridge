@@ -1,0 +1,41 @@
+# Canonical training contract for the model served by backend/models/word_model.py.
+# Do not point artifacts.output_root at backend/checkpoints: training runs are
+# deliberately isolated and never replace pinned runtime assets automatically.
+
+contract:
+  schema: "openpose_body25_filtered_plus_hands_xy_v1"
+  sequence_length: 50
+  joint_count: 55
+  coordinates: 2
+  normalization: "2 * (coordinate / 256 - 0.5)"
+
+dataset:
+  manifest: "data/pose55/manifest.json"
+  labels: "backend/checkpoints/wlasl100.txt"
+  # Minimum captured samples for each of the 100 labels in every explicit split.
+  # These are integrity gates, not a claim that this amount is research-sufficient.
+  minimum_samples_per_label:
+    train: 3
+    val: 1
+    test: 1
+
+model:
+  name: "pose-tgcn-wlasl100"
+  input_feature: 100
+  hidden_feature: 64
+  num_classes: 100
+  dropout: 0.3
+  num_stages: 20
+  residual: true
+
+training:
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.0
+  epochs: 200
+  early_stopping_patience: 20
+  random_seed: 42
+  num_workers: 0
+
+artifacts:
+  output_root: "artifacts/pose_tgcn"

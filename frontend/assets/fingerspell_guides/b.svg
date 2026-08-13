@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 232" role="img" aria-labelledby="title desc">
+  <title id="title">B fingerspelling landmark guide</title>
+  <desc id="desc">Schematic landmark guide derived from an observed class medoid; not a hand photograph.</desc>
+  <rect width="200" height="232" rx="18" fill="#071923" />
+  <g stroke="#39d9c6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+    <line x1="78.05" y1="148.39" x2="114.63" y2="155.71" />
+    <line x1="114.63" y1="155.71" x2="136.59" y2="155.71" />
+    <line x1="136.59" y1="155.71" x2="154.88" y2="166.68" />
+    <line x1="154.88" y1="166.68" x2="154.88" y2="174.00" />
+    <line x1="78.05" y1="148.39" x2="121.95" y2="152.05" />
+    <line x1="121.95" y1="152.05" x2="118.29" y2="111.80" />
+    <line x1="118.29" y1="111.80" x2="110.98" y2="71.56" />
+    <line x1="110.98" y1="71.56" x2="107.32" y2="34.98" />
+    <line x1="121.95" y1="152.05" x2="96.34" y2="144.73" />
+    <line x1="96.34" y1="144.73" x2="96.34" y2="97.17" />
+    <line x1="96.34" y1="97.17" x2="89.02" y2="56.93" />
+    <line x1="89.02" y1="56.93" x2="85.37" y2="24.00" />
+    <line x1="96.34" y1="144.73" x2="70.73" y2="144.73" />
+    <line x1="70.73" y1="144.73" x2="70.73" y2="97.17" />
+    <line x1="70.73" y1="97.17" x2="70.73" y2="60.59" />
+    <line x1="70.73" y1="60.59" x2="67.07" y2="31.32" />
+    <line x1="70.73" y1="144.73" x2="45.12" y2="144.73" />
+    <line x1="45.12" y1="144.73" x2="45.12" y2="119.12" />
+    <line x1="45.12" y1="119.12" x2="48.78" y2="86.20" />
+    <line x1="48.78" y1="86.20" x2="45.12" y2="60.59" />
+    <line x1="78.05" y1="148.39" x2="45.12" y2="144.73" />
+  </g>
+  <g fill="#d8fff9" stroke="#071923" stroke-width="1.4">
+    <circle cx="78.05" cy="148.39" r="3.1" />
+    <circle cx="114.63" cy="155.71" r="3.1" />
+    <circle cx="136.59" cy="155.71" r="3.1" />
+    <circle cx="154.88" cy="166.68" r="3.1" />
+    <circle cx="154.88" cy="174.00" r="3.1" />
+    <circle cx="121.95" cy="152.05" r="3.1" />
+    <circle cx="118.29" cy="111.80" r="3.1" />
+    <circle cx="110.98" cy="71.56" r="3.1" />
+    <circle cx="107.32" cy="34.98" r="3.1" />
+    <circle cx="96.34" cy="144.73" r="3.1" />
+    <circle cx="96.34" cy="97.17" r="3.1" />
+    <circle cx="89.02" cy="56.93" r="3.1" />
+    <circle cx="85.37" cy="24.00" r="3.1" />
+    <circle cx="70.73" cy="144.73" r="3.1" />
+    <circle cx="70.73" cy="97.17" r="3.1" />
+    <circle cx="70.73" cy="60.59" r="3.1" />
+    <circle cx="67.07" cy="31.32" r="3.1" />
+    <circle cx="45.12" cy="144.73" r="3.1" />
+    <circle cx="45.12" cy="119.12" r="3.1" />
+    <circle cx="48.78" cy="86.20" r="3.1" />
+    <circle cx="45.12" cy="60.59" r="3.1" />
+  </g>
+  <text x="100" y="207" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="30" font-weight="750">B</text>
+  <text x="100" y="224" text-anchor="middle" fill="#87a9b5" font-family="system-ui, sans-serif" font-size="8">LANDMARK GUIDE · MEDOID OF 1281 SAMPLES</text>
+</svg>

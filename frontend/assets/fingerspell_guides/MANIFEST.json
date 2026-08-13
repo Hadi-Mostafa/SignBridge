@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "representation": "mediapipe_landmark_guide",
+  "not_native_media": true,
+  "dynamic_letters_omitted": [
+    "J",
+    "Z"
+  ],
+  "source_csv": "backend/checkpoints/asl_keypoints.csv",
+  "source_csv_sha256": "b6922d3b38c0072ba367e89e17bd4fe174f0adb2928d0371c5152c1fc5068847",
+  "source_provenance": "bundled classifier training CSV; authoritative origin/license not declared",
+  "excluded_malformed_source_rows": [
+    35522
+  ],
+  "generation": "observed row nearest coordinate-wise class mean",
+  "assets": [
+    {
+      "letter": "A",
+      "relative_path": "a.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "187d7e87ca7113286e8b35bbc08ec79043c182228d67d1c7f568fd33d68a5435",
+      "sample_count": 4136
+    },
+    {
+      "letter": "B",
+      "relative_path": "b.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "f7ce8cc651130c419ed2034ff8c567bacf4c79845ea963f8d2d4229062da863a",
+      "sample_count": 1281
+    },
+    {
+      "letter": "C",
+      "relative_path": "c.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "035771aa79ebf09b3a27d66c8872839ad6ef7fe118f82aa7848ecbedf8cf18f2",
+      "sample_count": 578
+    },
+    {
+      "letter": "D",
+      "relative_path": "d.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "b3cf8b26871851a3146142b2fc337b092f6d4f159d2f70dc1652bfc27aa954aa",
+      "sample_count": 543
+    },
+    {
+      "letter": "E",
+      "relative_path": "e.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "b0d48fd69ee438f5dac5508767eff7afbdbabe98fa2934552563989a1e2aef38",
+      "sample_count": 2122
+    },
+    {
+      "letter": "F",
+      "relative_path": "f.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "f886a8856b0ba9dac44ce4b0e9243cef8e44eee818af2b4911a45269252a476c",
+      "sample_count": 1024
+    },
+    {
+      "letter": "G",
+      "relative_path": "g.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "7f5af0166f456f344bb32c82a85a4423344b7ce2d7d1382fb9e80dccc3d9985f",
+      "sample_count": 2565
+    },
+    {
+      "letter": "H",
+      "relative_path": "h.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "d9f9b968e095b7f1dbafb1615ae8af49f3d49c8dca3e1bb4848764e516433c48",
+      "sample_count": 1294
+    },
+    {
+      "letter": "I",
+      "relative_path": "i.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "06d944bc4c1d2f13d1c29173f3de5ca40b344f2f49755aee87291647605c3a6e",
+      "sample_count": 1021
+    },
+    {
+      "letter": "K",
+      "relative_path": "k.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "607b440506584bb4226f9eb941f443e24f98087cf12fd8c2bf0a596ee62527ad",
+      "sample_count": 1943
+    },
+    {
+      "letter": "L",
+      "relative_path": "l.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "3d205956f8c92bf846bca585c7c7cd75404ea0992f9a59f960f948de4c02a0d0",
+      "sample_count": 1417
+    },
+    {
+      "letter": "M",
+      "relative_path": "m.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "ce2247d949292c799a2d624a18ce559083fe146e3f040359e0b97ac79677f339",
+      "sample_count": 1245
+    },
+    {
+      "letter": "N",
+      "relative_path": "n.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "48ef451d7d22b3bd27817c0953bbff3dc56688547d944758fed775c09f22d752",
+      "sample_count": 1459
+    },
+    {
+      "letter": "O",
+      "relative_path": "o.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "69ac913e8e9781f04d68a3212988c30e3ab1314e2638cc016d1f806e1f193761",
+      "sample_count": 477
+    },
+    {
+      "letter": "P",
+      "relative_path": "p.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "c0f9835b32a78701207b1d26324620c06f7186ff6cefab840fc268f8060952a3",
+      "sample_count": 575
+    },
+    {
+      "letter": "Q",
+      "relative_path": "q.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "0e2894379112c6fafc42289b7e36f235297b606413c46ea936494cb60ae08691",
+      "sample_count": 694
+    },
+    {
+      "letter": "R",
+      "relative_path": "r.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "cce592163bc2600ba615ef8b86c8e6eca4102063fb9be4cf3526854b2e38d2f0",
+      "sample_count": 1287
+    },
+    {
+      "letter": "S",
+      "relative_path": "s.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "0f3dc87521ee647f4e4a7fbaff6b189b7ee71b43f845a90c9a20cc51d538b7b4",
+      "sample_count": 1640
+    },
+    {
+      "letter": "T",
+      "relative_path": "t.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "dac5dfe53f9bee21582149acb0fc8118638a03575b70dc6a27cf078329168536",
+      "sample_count": 1251
+    },
+    {
+      "letter": "U",
+      "relative_path": "u.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "14c8520062acabefef635cc2ec00f9e343ad11507a7febc264fde6e89e90a1b8",
+      "sample_count": 1182
+    },
+    {
+      "letter": "V",
+      "relative_path": "v.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "f40a8d3ce7ec2c0b4754818a105c41412e1ee7445eeaac74221fc379caf12011",
+      "sample_count": 1227
+    },
+    {
+      "letter": "W",
+      "relative_path": "w.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "a4c2dbca2767137bd9f6f71fd5ca9a2ba2acfa90d436f248a4d91dd938041a93",
+      "sample_count": 1302
+    },
+    {
+      "letter": "X",
+      "relative_path": "x.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "66f175ed3896e0efdecd12d6d96db60e55d83d50f7c03c17f3e5146dccb90e7f",
+      "sample_count": 1094
+    },
+    {
+      "letter": "Y",
+      "relative_path": "y.svg",
+      "mime_type": "image/svg+xml",
+      "sha256": "11ee778baf20dd6a1f4b950ef5f124a1c29801e8d6b5beeb20c691ff2b832a22",
+      "sample_count": 2179
+    }
+  ]
+}

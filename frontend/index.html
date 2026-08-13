@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SignBridge translates signs to sentences and text or speech to visual sign sequences.">
+    <meta name="theme-color" content="#07111f">
+    <title>SignBridge | Two-way sign communication</title>
+    <link rel="stylesheet" href="/static/style.css?v=17">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="app-header">
+        <div class="header-inner">
+            <a class="brand" href="#sign-input" aria-label="SignBridge home">
+                <span class="brand-mark" aria-hidden="true">SB</span>
+                <span>
+                    <span class="eyebrow">Accessible communication</span>
+                    <span class="brand-name">SignBridge</span>
+                </span>
+            </a>
+
+            <nav class="page-nav" aria-label="Translation direction">
+                <button id="nav-sign-input" class="page-nav-button" type="button" data-page="sign-input" aria-pressed="true">
+                    <span aria-hidden="true">01</span>
+                    Sign to text
+                </button>
+                <button id="nav-text-to-sign" class="page-nav-button" type="button" data-page="text-to-sign" aria-pressed="false">
+                    <span aria-hidden="true">02</span>
+                    Text &amp; voice to sign
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="app-shell">
+        <section id="page-sign-input" class="app-page" data-page-panel="sign-input" aria-labelledby="sign-page-heading">
+            <div class="page-intro">
+                <div>
+                    <p class="eyebrow">Sign language keyboard</p>
+                    <h1 id="sign-page-heading">Turn hand signs into a sentence</h1>
+                    <p>Spell at your own pace, choose a suggested word, then continue signing.</p>
+                </div>
+                <span class="prototype-badge">Research prototype</span>
+            </div>
+
+            <section class="status-panel" aria-labelledby="system-heading">
+                <div class="section-heading-row">
+                    <div>
+                        <p class="eyebrow">System</p>
+                        <h2 id="system-heading">Readiness</h2>
+                    </div>
+                    <button id="retry-backend" class="button button-quiet" type="button">Retry connection</button>
+                </div>
+
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span id="backend-status-indicator" class="status-indicator" data-state="checking" aria-hidden="true"></span>
+                        <span class="status-copy">
+                            <strong>Backend</strong>
+                            <span id="backend-status">Checking API and stream</span>
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span id="camera-status-indicator" class="status-indicator" data-state="offline" aria-hidden="true"></span>
+                        <span class="status-copy">
+                            <strong>Camera</strong>
+                            <span id="camera-status">Stopped</span>
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span id="alphabet-status-indicator" class="status-indicator" data-state="checking" aria-hidden="true"></span>
+                        <span class="status-copy">
+                            <strong>Alphabet model</strong>
+                            <span id="alphabet-status">Checking readiness</span>
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span id="words-status-indicator" class="status-indicator" data-state="checking" aria-hidden="true"></span>
+                        <span class="status-copy">
+                            <strong>Word model</strong>
+                            <span id="words-status">Checking readiness</span>
+                        </span>
+                    </div>
+                </div>
+
+                <p id="system-message" class="system-message" role="status" aria-live="polite">
+                    Start the camera when you are ready. Camera access is never requested automatically.
+                </p>
+            </section>
+
+            <div class="workspace-grid">
+                <section class="card camera-card" aria-labelledby="camera-heading">
+                    <div class="section-heading-row">
+                        <div>
+                            <p class="eyebrow">Live input</p>
+                            <h2 id="camera-heading">Camera</h2>
+                        </div>
+                        <span id="fps-display" class="metric-pill" aria-label="Processed camera frames per second">0 FPS</span>
+                    </div>
+
+                    <div id="video-stage" class="video-stage">
+                        <video id="webcam" autoplay muted playsinline aria-label="Live camera preview"></video>
+                        <canvas id="overlay" width="640" height="480" aria-hidden="true"></canvas>
+                        <div id="camera-placeholder" class="camera-placeholder">
+                            <span class="camera-placeholder-icon" aria-hidden="true"></span>
+                            <strong>Camera preview is off</strong>
+                            <span>You stay in control of camera access.</span>
+                        </div>
+                    </div>
+
+                    <div class="button-row camera-controls">
+                        <button id="start-camera" class="button button-primary" type="button">Start camera</button>
+                        <button id="stop-camera" class="button button-secondary" type="button" disabled>Stop camera</button>
+                    </div>
+
+                    <div class="mode-section">
+                        <h3 id="mode-heading">Recognition mode</h3>
+                        <div class="mode-switch" role="group" aria-labelledby="mode-heading">
+                            <button id="mode-alphabet" class="mode-button" type="button" aria-pressed="false" disabled>
+                                Alphabet keyboard
+                                <span class="mode-detail">Build words one accepted letter at a time</span>
+                            </button>
+                            <button id="mode-words" class="mode-button" type="button" aria-pressed="false" disabled>
+                                Isolated word
+                                <span id="words-experimental-badge" class="experimental-badge is-hidden">Experimental</span>
+                                <span class="mode-detail">One guided 50-frame capture</span>
+                            </button>
+                        </div>
+                        <p id="mode-guidance" class="guidance">Waiting for model readiness.</p>
+                    </div>
+
+                    <div id="words-capture-panel" class="capture-panel is-hidden">
+                        <div class="capture-copy">
+                            <h3>Capture one complete sign</h3>
+                            <p id="capture-guidance">Hold your upper body and hands in view, then capture the sign once.</p>
+                        </div>
+                        <button id="start-word-capture" class="button button-primary" type="button" disabled>Capture 50 frames</button>
+                        <div class="capture-progress-row">
+                            <div id="capture-progress" class="progress-track" role="progressbar" aria-label="Word capture progress" aria-valuemin="0" aria-valuemax="50" aria-valuenow="0">
+                                <span id="capture-progress-fill" class="progress-fill"></span>
+                            </div>
+                            <span id="capture-progress-text">0 / 50</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card keyboard-card" aria-labelledby="keyboard-heading">
+                    <div class="section-heading-row">
+                        <div>
+                            <p class="eyebrow">Compose</p>
+                            <h2 id="keyboard-heading">Sign keyboard</h2>
+                        </div>
+                        <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="true" aria-label="Turn sound feedback off">
+                            <span class="sound-icon" aria-hidden="true"></span>
+                            <span id="sound-toggle-label">Sound on</span>
+                        </button>
+                    </div>
+
+                    <div class="letter-dashboard">
+                        <div class="current-letter-panel">
+                            <span class="field-label">Current letter</span>
+                            <strong id="current-letter" class="current-letter" aria-live="polite">—</strong>
+                        </div>
+                        <div class="spelling-panel">
+                            <span class="field-label">Currently spelling</span>
+                            <p id="current-spelling" class="current-spelling" aria-live="polite">Start signing a word</p>
+                            <p id="input-readiness" class="input-readiness" data-state="ready">Ready for a letter</p>
+                        </div>
+                    </div>
+
+                    <section class="suggestion-section" aria-labelledby="suggestion-heading">
+                        <div class="section-heading-row compact">
+                            <div>
+                                <h3 id="suggestion-heading">Word suggestions</h3>
+                                <p id="suggestion-help">Suggestions appear after your first letter.</p>
+                            </div>
+                        </div>
+                        <div id="word-suggestions" class="suggestion-grid" aria-label="Autocomplete suggestions" aria-live="polite">
+                            <p class="suggestion-empty">Sign a letter to begin</p>
+                        </div>
+                        <p class="keyboard-shortcuts"><kbd>Enter</kbd> accept <span aria-hidden="true">&middot;</span> <kbd>&larr;</kbd><kbd>&rarr;</kbd> choose suggestion <span aria-hidden="true">&middot;</span> <kbd>Backspace</kbd> remove letter</p>
+                    </section>
+
+                    <div class="keyboard-actions" aria-label="Spelling controls">
+                        <button id="keyboard-backspace" class="button button-secondary" type="button" disabled>Backspace</button>
+                        <button id="keyboard-clear-letters" class="button button-secondary" type="button" disabled>Clear letters</button>
+                        <button id="keyboard-space" class="button button-secondary" type="button" disabled>Space / add word</button>
+                        <button id="keyboard-confirm" class="button button-primary keyboard-confirm" type="button" disabled>Accept best suggestion</button>
+                    </div>
+
+                    <section class="sentence-panel" aria-labelledby="sentence-heading">
+                        <div class="section-heading-row compact">
+                            <div>
+                                <p class="eyebrow">Your message</p>
+                                <h3 id="sentence-heading">Complete sentence</h3>
+                            </div>
+                            <button id="keyboard-clear-sentence" class="button button-quiet" type="button" disabled>Clear sentence</button>
+                        </div>
+                        <p id="sentence-output" class="sentence-output" aria-live="polite">Your accepted words will appear here.</p>
+                    </section>
+
+                    <details class="diagnostics">
+                        <summary>Recognition details</summary>
+                        <div class="diagnostics-content">
+                            <div class="section-heading-row">
+                                <h3 id="output-heading">Live model output</h3>
+                                <span id="prediction-state" class="prediction-state" data-state="waiting">Waiting</span>
+                            </div>
+
+                            <div class="prediction-panel" aria-live="polite" aria-atomic="true">
+                                <p id="prediction-text" class="prediction-text waiting">No live prediction</p>
+                                <p id="prediction-detail" class="prediction-detail">Start the camera and choose an available mode.</p>
+                                <div class="confidence-row">
+                                    <span>Confidence</span>
+                                    <span id="confidence-text">0%</span>
+                                </div>
+                                <div id="confidence-progress" class="progress-track confidence-track" role="progressbar" aria-label="Prediction confidence" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                    <span id="confidence-fill" class="progress-fill"></span>
+                                </div>
+                            </div>
+
+                            <div class="metrics-grid" aria-label="Live performance metrics">
+                                <div class="metric-card"><span class="metric-label">Round trip</span><strong id="latency-display">--</strong></div>
+                                <div class="metric-card"><span class="metric-label">Server inference</span><strong id="server-latency-display">--</strong></div>
+                                <div class="metric-card"><span class="metric-label">Stream</span><strong id="stream-status">Offline</strong></div>
+                            </div>
+
+                            <section class="subsection" aria-labelledby="top-predictions-heading">
+                                <h3 id="top-predictions-heading">Top model candidates</h3>
+                                <ol id="top-predictions-list" class="candidate-list">
+                                    <li class="empty-state">No candidates yet</li>
+                                </ol>
+                            </section>
+
+                            <section class="subsection history-section" aria-labelledby="history-heading">
+                                <div class="section-heading-row compact">
+                                    <h3 id="history-heading">Accepted detection history</h3>
+                                    <button id="clear-history" class="button button-quiet" type="button">Clear history</button>
+                                </div>
+                                <ol id="history-list" class="history-list" aria-live="polite">
+                                    <li class="empty-state">Accepted signs will appear here</li>
+                                </ol>
+                            </section>
+
+                            <div class="button-row">
+                                <button id="reset-sign" class="button button-secondary" type="button">Reset current sign</button>
+                            </div>
+                        </div>
+                    </details>
+                </section>
+            </div>
+        </section>
+
+        <section id="page-text-to-sign" class="app-page" data-page-panel="text-to-sign" aria-labelledby="translation-page-heading" hidden>
+            <div class="page-intro">
+                <div>
+                    <p class="eyebrow">Reverse translation</p>
+                    <h1 id="translation-page-heading">Turn text or speech into signs</h1>
+                    <p>Enter a complete thought or record your voice. SignBridge creates a visual sequence of sign concepts and fingerspelling.</p>
+                </div>
+                <span class="prototype-badge">Text + microphone</span>
+            </div>
+
+            <section class="page-service-status" aria-labelledby="translation-readiness-heading">
+                <div>
+                    <p class="eyebrow">Service readiness</p>
+                    <h2 id="translation-readiness-heading" class="sr-only">Text and voice translation readiness</h2>
+                </div>
+                <div class="translation-readiness-items">
+                    <span class="readiness-item">
+                        <span id="text-service-indicator" class="status-indicator" data-state="checking" aria-hidden="true"></span>
+                        <span><strong>Text translation</strong><small id="text-service-status">Checking</small></span>
+                    </span>
+                    <span class="readiness-item">
+                        <span id="voice-service-indicator" class="status-indicator" data-state="checking" aria-hidden="true"></span>
+                        <span><strong>Voice transcription</strong><small id="voice-service-status">Checking</small></span>
+                    </span>
+                </div>
+                <p id="translation-service-message" class="service-readiness-message" role="status" aria-live="polite">Checking text and voice services…</p>
+            </section>
+
+            <div class="translation-workspace">
+                <section class="card translation-input-card" aria-labelledby="text-input-heading">
+                    <div class="section-heading-row">
+                        <div>
+                            <p class="eyebrow">Write</p>
+                            <h2 id="text-input-heading">Your message</h2>
+                        </div>
+                        <span id="translation-char-count" class="metric-pill">0 / 2000</span>
+                    </div>
+
+                    <form id="text-sign-form" class="translation-form">
+                        <label class="sr-only" for="translation-input">Sentence to translate into signs</label>
+                        <textarea id="translation-input" maxlength="2000" rows="6" placeholder="For example: I am going to the hospital." required></textarea>
+                        <div class="button-row">
+                            <button id="translate-text" class="button button-primary" type="submit">Translate to signs</button>
+                            <button id="clear-translation-input" class="button button-secondary" type="button">Clear</button>
+                        </div>
+                    </form>
+
+                    <div class="input-divider" aria-hidden="true"><span>or use your voice</span></div>
+
+                    <section class="voice-panel" aria-labelledby="voice-heading">
+                        <div>
+                            <h3 id="voice-heading">Voice input</h3>
+                            <p>Your microphone is used only while recording or listening. Final speech is translated automatically.</p>
+                        </div>
+                        <span id="voice-input-mode" class="voice-input-mode">Checking browser support</span>
+                        <div class="voice-controls">
+                            <button id="start-recording" class="button button-secondary mic-button" type="button">
+                                <span class="mic-icon" aria-hidden="true"></span>
+                                <span id="start-recording-label">Start listening</span>
+                            </button>
+                            <button id="stop-recording" class="button button-danger" type="button" disabled><span id="stop-recording-label">Stop &amp; translate</span></button>
+                            <span id="recording-time" class="recording-time" aria-hidden="true">00:00</span>
+                        </div>
+                        <p id="voice-status" class="voice-status" role="status" aria-live="polite">Microphone is off.</p>
+                        <p id="voice-live-transcript" class="voice-live-transcript is-hidden" aria-live="polite"></p>
+                        <p id="voice-privacy-note" class="voice-privacy-note is-hidden"></p>
+                    </section>
+                </section>
+
+                <section class="card translation-summary-card" aria-labelledby="translation-status-heading">
+                    <div class="section-heading-row">
+                        <div>
+                            <p class="eyebrow">Translation</p>
+                            <h2 id="translation-status-heading">Sequence status</h2>
+                        </div>
+                        <span id="translation-state" class="prediction-state" data-state="waiting">Ready</span>
+                    </div>
+                    <div id="translation-empty" class="translation-empty">
+                        <span class="sequence-placeholder" aria-hidden="true">A · B · C</span>
+                        <strong>No translation yet</strong>
+                        <p>Your sign sequence will appear here in reading order.</p>
+                    </div>
+                    <div id="translation-summary" class="translation-summary is-hidden">
+                        <div>
+                            <span class="field-label">Source transcript</span>
+                            <p id="translation-transcript" class="translation-transcript"></p>
+                        </div>
+                        <div>
+                            <span class="field-label">Sign concepts</span>
+                            <div id="normalized-tokens" class="token-list" aria-label="Normalized sign concepts"></div>
+                        </div>
+                        <p id="translation-note" class="translation-note"></p>
+                    </div>
+                    <p id="translation-message" class="system-message is-hidden" role="status" aria-live="polite"></p>
+                </section>
+            </div>
+
+            <section id="sign-results-card" class="card sign-results-card is-hidden" aria-labelledby="sign-results-heading">
+                <div class="section-heading-row">
+                    <div>
+                        <p class="eyebrow">Visual output</p>
+                        <h2 id="sign-results-heading">Sign sequence</h2>
+                    </div>
+                    <div class="sequence-meta">
+                        <span id="sequence-position" class="metric-pill">0 / 0</span>
+                        <span id="sign-count" class="metric-pill">0 steps</span>
+                    </div>
+                </div>
+                <p class="sequence-guidance">Follow the numbered cards from left to right. Video controls are available for every local sign clip.</p>
+                <ol id="sign-sequence" class="sign-sequence" aria-live="polite"></ol>
+                <div class="sequence-controls" aria-label="Sign sequence controls">
+                    <button id="previous-sign" class="button button-secondary" type="button" disabled>Previous</button>
+                    <button id="sequence-action" class="button button-primary" type="button" disabled>Play sign</button>
+                    <button id="next-sign" class="button button-secondary" type="button" disabled>Next</button>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>SignBridge is a research prototype and is not a substitute for a qualified interpreter.</p>
+    </footer>
+
+    <script defer src="/static/app.js?v=17"></script>
+</body>
+</html>
