@@ -32,7 +32,7 @@ Follow these steps carefully to get SignBridge running locally on your laptop.
 ### 1. Clone the Repository
 Open your terminal or PowerShell and run:
 ```bash
-git clone https://github.com/hadi-mostafa-27/SignBridge.git
+git clone https://github.com/Hadi-Mostafa/SignBridge.git
 cd SignBridge
 ```
 
@@ -121,5 +121,5 @@ python -m unittest -v
 ---
 
 <div align="center">
-  <b>Developed by <a href="https://github.com/hadi-mostafa-27">@hadi-mostafa-27</a></b>
+  <b>Developed by <a href="https://github.com/Hadi-Mostafa">@Hadi-Mostafa</a></b>
 </div>
