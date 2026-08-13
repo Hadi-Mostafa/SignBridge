@@ -120,6 +120,4 @@ python -m unittest -v
 
 ---
 
-<div align="center">
-  <b>Developed by <a href="https://github.com/Hadi-Mostafa">@Hadi-Mostafa</a></b>
-</div>
+
